@@ -16,7 +16,7 @@ import java.io.IOException;
  * @Description
  */
 public class GethConfig {
-    public static String gethURL = "http://10.154.24.12:8545";
+    public static String gethURL = "http://81.71.46.41:8546";//"http://10.154.24.12:8545";
     public static Web3j web3j = Web3j.build(new HttpService(gethURL));
     public static Credentials credentials;
     static {
