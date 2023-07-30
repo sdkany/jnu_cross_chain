@@ -88,11 +88,25 @@ public class HelloWorldController {
     @RequestMapping("/readGethTransactionState")
     public String readGethTransaction(@RequestParam(name = "transHash") String transHash) throws TransactionException, IOException {
         // 等待交易被挖矿
+        //System.out.println("----in readGethTransactionState");
+        //System.out.println(transHash);
+
         Transaction transaction = GethConfig.web3j.ethGetTransactionByHash(transHash).send().getTransaction().get();
+
+        //System.out.println(transaction.getBlockNumberRaw());
+
         if (transaction == null){
-            return "交易" + transHash + "还未被写入到区块！";
+            Response response = new Response("交易" + transHash + "还未被写入到区块！", -1, null);
+            return JSONObject.toJSONString(response, true);
         }else{
-            return "交易" + transHash + "被写入到" + transaction.getBlockNumber() + "块！数据内容为：" + transaction.getInput();
+            //System.out.println("11111");
+            //System.out.println(transaction);
+//            BigInteger blockNumber = transaction.getBlockNumber();
+//            System.out.println(blockNumber.intValue());
+//            System.out.println("交易" + transHash + "被写入到" + transaction.getBlockNumber().toString() + "块！");
+//            System.out.println(transaction.getInput());
+            Response response = new Response("交易" + transHash + "被写入到了以太坊！", 0, transaction.getInput());
+            return JSONObject.toJSONString(response, true);
         }
     }
 }
