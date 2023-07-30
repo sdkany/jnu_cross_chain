@@ -1,7 +1,9 @@
 package jnu.cross.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.citahub.cita.protocol.core.DefaultBlockParameter;
 import com.citahub.cita.protocol.core.methods.response.AppBlock;
+import jnu.cross.Response;
 import jnu.cross.config.CITAConfig;
 import jnu.cross.config.GethConfig;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,7 +72,9 @@ public class HelloWorldController {
 
         System.out.println("hexValue : " + hexValue);
 
-        return "本数据已被提交至Geth矿池，等待被挖矿：" + ethSendTransaction.getTransactionHash();
+        Response response = new Response("本数据已被提交至Geth矿池，等待被挖矿", 0, ethSendTransaction.getTransactionHash());
+
+        return JSONObject.toJSONString(response, true);
 
         // 等待交易被挖矿
 //        TransactionReceiptProcessor receiptProcessor = new PollingTransactionReceiptProcessor(
