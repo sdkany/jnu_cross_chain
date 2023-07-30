@@ -40,7 +40,7 @@ public class HelloWorldController {
 
     @RequestMapping("/readCITABlock")
     public String readCITABlock(@RequestParam(name = "blockNumber",required=false) String blockNumber) throws IOException {
-        AppBlock.Block block = CITAConfig.citaj.appGetBlockByNumber(blockNumber==null?DefaultBlockParameter.valueOf("latest"): DefaultBlockParameter.valueOf(new BigInteger(blockNumber)), true).send().getBlock();
+        AppBlock.Block block = CITAConfig.citaj.appGetBlockByNumber((blockNumber==null || blockNumber.isEmpty())?DefaultBlockParameter.valueOf("latest"): DefaultBlockParameter.valueOf(new BigInteger(blockNumber)), true).send().getBlock();
         System.out.println("获取到的data为：" + block.getHash());
         return block.getHash(); // 先暂时返回block的hash了
     }

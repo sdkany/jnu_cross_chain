@@ -11,6 +11,6 @@ import com.citahub.cita.protocol.CITAj;
  */
 public class CITAConfig {
 
-    public static String citaURL = "http://10.154.24.5:1337";
+    public static String citaURL = "http://81.71.46.41:1337";
     public static CITAj citaj = CITAj.build(new com.citahub.cita.protocol.http.HttpService(citaURL));
 }
